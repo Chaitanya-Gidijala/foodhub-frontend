@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiGateway: 'http://localhost:9001'
+  apiGateway: 'https://foodhub-api-gateway-service.onrender.com'
 };
