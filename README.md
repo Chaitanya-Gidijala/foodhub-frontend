@@ -39,3 +39,4 @@ Application will run on http://localhost:4200
 ```bash
 npm run build
 ```
+# foodhub-frontend
