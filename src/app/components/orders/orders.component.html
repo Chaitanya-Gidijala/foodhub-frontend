@@ -1,0 +1,66 @@
+<!-- Premium Orders Page -->
+<div class="page-container">
+  <div class="orders-container">
+  <div class="orders-header">
+    <h1>
+      <mat-icon>receipt_long</mat-icon>
+      My Orders
+    </h1>
+  </div>
+
+  <div class="orders-content">
+    <div class="orders-grid" *ngIf="orders.length > 0">
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-header">
+          <div class="order-title">
+            <div class="order-id">Order #{{order.orderId}}</div>
+            <div class="restaurant-name">
+              <mat-icon>restaurant</mat-icon>
+              <span>{{order.restaurantName}}</span>
+            </div>
+          </div>
+          <div class="status-badge" [ngClass]="'status-' + order.status.toLowerCase()">
+            {{order.status.replace('_', ' ')}}
+          </div>
+        </div>
+
+        <div class="order-body">
+          <div class="order-details">
+            <div class="detail-item" *ngIf="order.orderDate">
+              <mat-icon>schedule</mat-icon>
+              <span class="detail-label">Ordered:</span>
+              <span class="detail-value">{{order.orderDate | date:'medium'}}</span>
+            </div>
+            <div class="detail-item" *ngIf="order.cartItems && order.cartItems.length > 0">
+              <mat-icon>shopping_bag</mat-icon>
+              <span class="detail-label">Items:</span>
+              <span class="detail-value">{{order.cartItems.length}} item(s)</span>
+            </div>
+          </div>
+          <div class="order-total">
+            <div class="total-label">Total Amount</div>
+            <div class="total-amount">₹{{order.totalPrice}}</div>
+          </div>
+        </div>
+
+        <div class="order-actions">
+          <button class="view-btn" (click)="viewDetails(order)">
+            <mat-icon>visibility</mat-icon>
+            <span>View Details</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="orders.length === 0">
+      <div class="empty-icon">📦</div>
+      <h2>No orders yet</h2>
+      <p>Start exploring restaurants and place your first order</p>
+      <button class="browse-btn" routerLink="/home">
+        <mat-icon>restaurant</mat-icon>
+        <span>Browse Restaurants</span>
+      </button>
+    </div>
+  </div>
+</div>
+</div>

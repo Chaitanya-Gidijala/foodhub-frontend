@@ -1,0 +1,60 @@
+<div class="page-container dashboard-layout">
+  <app-customer-sidebar></app-customer-sidebar>
+  <div class="dashboard-content address-list-container">
+  <div class="header">
+    <h1>
+      <mat-icon>location_on</mat-icon>
+      My Addresses
+    </h1>
+    <button mat-raised-button color="primary" (click)="addNewAddress()">
+      <mat-icon>add</mat-icon>
+      Add New Address
+    </button>
+  </div>
+
+  <div class="addresses-grid" *ngIf="addresses.length > 0">
+    <mat-card *ngFor="let address of addresses" class="address-card">
+      <mat-card-header>
+        <div class="address-type">
+          <mat-icon>{{address.addressType === 'HOME' ? 'home' : address.addressType === 'WORK' ? 'business' : 'location_on'}}</mat-icon>
+          <span>{{address.addressType}}</span>
+          <span class="default-badge" *ngIf="address.isDefault">Default</span>
+        </div>
+        <div class="actions">
+          <button mat-icon-button (click)="editAddress(address.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteAddress(address.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <div class="address-details">
+          <p class="contact">{{address.fullName}} | {{address.phoneNumber}}</p>
+          <p class="address-line">{{address.addressLine1}}</p>
+          <p class="address-line" *ngIf="address.addressLine2">{{address.addressLine2}}</p>
+          <p class="address-line">{{address.city}}, {{address.state}} - {{address.pincode}}</p>
+          <p class="landmark" *ngIf="address.landmark">Near: {{address.landmark}}</p>
+          <p class="label" *ngIf="address.label">{{address.label}}</p>
+        </div>
+      </mat-card-content>
+      
+      <mat-card-actions *ngIf="!address.isDefault">
+        <button mat-button color="primary" (click)="setAsDefault(address.id)">
+          Set as Default
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div class="no-addresses" *ngIf="addresses.length === 0">
+    <mat-icon>location_off</mat-icon>
+    <p>No addresses found</p>
+    <button mat-raised-button color="primary" (click)="addNewAddress()">
+      Add Your First Address
+    </button>
+  </div>
+</div>
+</div>

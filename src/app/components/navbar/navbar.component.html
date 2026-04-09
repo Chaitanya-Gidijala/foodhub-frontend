@@ -1,0 +1,56 @@
+<!-- Premium Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand" routerLink="/home">
+      <div class="brand-logo">
+        <mat-icon>restaurant</mat-icon>
+      </div>
+      <span class="brand-name">FoodHub</span>
+    </div>
+
+    <div class="navbar-menu">
+      <a class="nav-link" routerLink="/home" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        <span>Home</span>
+      </a>
+
+      <a class="nav-link" routerLink="/favorites" routerLinkActive="active">
+        <mat-icon>favorite</mat-icon>
+        <span>Favorites</span>
+      </a>
+
+      <a class="nav-link cart-link" routerLink="/cart" routerLinkActive="active" *ngIf="user?.role !== 'ADMIN' && user?.role !== 'RESTAURANT_OWNER'">
+        <div class="cart-icon-wrapper">
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="cart-badge" *ngIf="cartCount > 0">{{cartCount}}</span>
+        </div>
+        <span>Cart</span>
+      </a>
+
+      <a class="nav-link" routerLink="/orders" routerLinkActive="active" *ngIf="isLoggedIn() && user?.role === 'CUSTOMER'">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Orders</span>
+      </a>
+
+      <div class="user-menu" *ngIf="isLoggedIn()">
+        <button class="user-btn" routerLink="/profile" type="button" title="View Profile">
+          <div class="user-avatar">
+            <mat-icon>account_circle</mat-icon>
+            <span class="user-role-dot" [class.admin]="user?.role === 'ADMIN'"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="navbar-auth" *ngIf="!isLoggedIn()">
+      <a class="btn-outline" routerLink="/login">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+      <a class="btn-primary" routerLink="/register">
+        <mat-icon>person_add</mat-icon>
+        <span>Sign Up</span>
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,161 @@
+<div class="home-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-decoration">
+      <div class="food-emoji emoji-1">🍕</div>
+      <div class="food-emoji emoji-2">🍔</div>
+      <div class="food-emoji emoji-3">🍜</div>
+      <div class="food-emoji emoji-4">🍰</div>
+      <div class="food-emoji emoji-5">🥗</div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <mat-icon>bolt</mat-icon>
+          Fast Delivery · Best Restaurants
+        </div>
+        <h1 class="hero-title">
+          Order food from your<br>
+          <span class="highlight">favourite restaurants</span>
+        </h1>
+        <p class="hero-subtitle">Discover the best food & drinks in your city, delivered right to your door</p>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper">
+        <div class="search-box">
+          <mat-icon class="search-icon">search</mat-icon>
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearch()"
+            placeholder="Search for restaurants, cuisines, or dishes..."
+            class="search-input"
+            id="home-search-input">
+          <button class="search-btn" *ngIf="searchTerm" (click)="searchTerm = ''; onSearch()" type="button">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Restaurants</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">30 min</div>
+          <div class="stat-label">Avg. Delivery</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">4.8 ★</div>
+          <div class="stat-label">Avg. Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">50K+</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Categories -->
+  <section class="categories-section">
+    <div class="section-header">
+      <h2>What's on your mind?</h2>
+    </div>
+    <div class="categories-scroll">
+      <div class="category-card" (click)="filterByCategory('Pizza')" id="cat-pizza">
+        <div class="category-icon">🍕</div>
+        <span>Pizza</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Burger')" id="cat-burger">
+        <div class="category-icon">🍔</div>
+        <span>Burgers</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Noodles')" id="cat-noodles">
+        <div class="category-icon">🍜</div>
+        <span>Noodles</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Curry')" id="cat-curry">
+        <div class="category-icon">🍛</div>
+        <span>Curry</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Salad')" id="cat-salad">
+        <div class="category-icon">🥗</div>
+        <span>Salads</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Dessert')" id="cat-dessert">
+        <div class="category-icon">🍰</div>
+        <span>Desserts</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Coffee')" id="cat-coffee">
+        <div class="category-icon">☕</div>
+        <span>Coffee</span>
+      </div>
+      <div class="category-card" (click)="filterByCategory('Drinks')" id="cat-drinks">
+        <div class="category-icon">🥤</div>
+        <span>Drinks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restaurants Section -->
+  <section class="restaurants-section">
+    <div class="section-header">
+      <h2>Restaurants near you</h2>
+      <p class="result-count">{{filteredRestaurants.length}} restaurants found</p>
+    </div>
+
+    <div class="restaurant-grid" *ngIf="filteredRestaurants.length > 0">
+      <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants" (click)="viewMenu(restaurant.restaurantName)">
+        <div class="restaurant-image">
+          <div class="image-placeholder">
+            <mat-icon>restaurant</mat-icon>
+          </div>
+          <button class="favorite-btn" (click)="toggleFavorite($event, restaurant)" [class.active]="isFavorite(restaurant.id!)">
+            <mat-icon>{{ isFavorite(restaurant.id!) ? 'favorite' : 'favorite_border' }}</mat-icon>
+          </button>
+          <div class="restaurant-badge">
+            <mat-icon>star</mat-icon>
+            <span>4.5</span>
+          </div>
+        </div>
+
+        <div class="restaurant-info">
+          <h3 class="restaurant-name">{{restaurant.restaurantName}}</h3>
+
+          <div class="restaurant-meta">
+            <div class="meta-item">
+              <mat-icon>location_on</mat-icon>
+              <span>{{restaurant.location}}</span>
+            </div>
+            <div class="meta-item">
+              <mat-icon>access_time</mat-icon>
+              <span>30–40 min</span>
+            </div>
+          </div>
+
+          <div class="restaurant-footer">
+            <div class="price-tag">
+              <span>₹{{getCostForTwo(restaurant.restaurantName)}} for two</span>
+            </div>
+            <button class="view-menu-btn" type="button">
+              <span>View Menu</span>
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="filteredRestaurants.length === 0">
+      <span class="empty-icon">🔍</span>
+      <h3>No restaurants found</h3>
+      <p>Try searching with different keywords</p>
+    </div>
+  </section>
+</div>

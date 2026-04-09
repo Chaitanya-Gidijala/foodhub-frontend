@@ -1,0 +1,63 @@
+<!-- Premium Payment Page -->
+<div class="payment-container u-compact">
+  <div class="payment-header">
+    <h1>
+      <mat-icon>payment</mat-icon>
+      Complete Your Payment
+    </h1>
+  </div>
+
+  <div class="payment-wrapper">
+    <div class="payment-main">
+      <div class="section-card card-compact" *ngIf="selectedAddress">
+        <div class="section-header">
+          <mat-icon>location_on</mat-icon>
+          <h2>Delivery Address</h2>
+        </div>
+        <div class="address-details">
+          <p class="address-name">{{selectedAddress.fullName}}</p>
+          <p class="address-line">{{selectedAddress.addressLine1}}</p>
+          <p class="address-line" *ngIf="selectedAddress.addressLine2">{{selectedAddress.addressLine2}}</p>
+          <p class="address-line">{{selectedAddress.city}}, {{selectedAddress.state}} - {{selectedAddress.pincode}}</p>
+          <p class="address-phone">
+            <mat-icon>phone</mat-icon>
+            {{selectedAddress.phoneNumber}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-sidebar">
+      <div class="order-summary card-compact">
+        <h3 class="summary-header">Order Summary</h3>
+        <div class="summary-body">
+          <div class="summary-row">
+            <span class="label">Item Total</span>
+            <span class="value">₹{{itemTotal}}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Delivery Fee</span>
+            <span class="value">₹{{deliveryFee}}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Taxes & Charges</span>
+            <span class="value">₹{{taxes}}</span>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-total">
+            <span>Total Amount</span>
+            <span>₹{{totalAmount}}</span>
+          </div>
+          <button class="pay-button btn-compact" [disabled]="!selectedAddress" (click)="proceedToPayment()">
+            <mat-icon>credit_card</mat-icon>
+            <span>Pay ₹{{totalAmount}}</span>
+          </button>
+          <div class="secure-badge">
+            <mat-icon>lock</mat-icon>
+            <span>100% Secure Payment</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

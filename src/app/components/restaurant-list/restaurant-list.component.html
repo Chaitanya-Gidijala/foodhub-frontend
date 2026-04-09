@@ -1,0 +1,59 @@
+<!-- Professional Restaurant List -->
+<div class="restaurants-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>All Restaurants</h1>
+      <p>Discover top-rated places around you</p>
+    </div>
+    <div class="result-count">
+      <span>{{restaurants.length}} places found</span>
+    </div>
+  </div>
+
+  <div class="restaurant-grid" *ngIf="restaurants.length > 0">
+    <div class="restaurant-card" *ngFor="let restaurant of restaurants" (click)="viewMenu(restaurant.restaurantName)">
+      <div class="restaurant-image">
+        <div class="image-placeholder">
+          <mat-icon>restaurant</mat-icon>
+        </div>
+        <button class="favorite-btn" (click)="toggleFavorite($event, restaurant)" [class.active]="isFavorite(restaurant.id!)">
+          <mat-icon>{{ isFavorite(restaurant.id!) ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>  
+        <div class="restaurant-badge">
+          <mat-icon>star</mat-icon>
+          <span>4.5</span>
+        </div>
+
+      <div class="restaurant-info">
+        <h3 class="restaurant-name">{{restaurant.restaurantName}}</h3>
+
+        <div class="restaurant-meta">
+          <div class="meta-item">
+            <mat-icon>location_on</mat-icon>
+            <span>{{restaurant.location}}</span>
+          </div>
+          <div class="meta-item" *ngIf="restaurant.phone">
+            <mat-icon>phone</mat-icon>
+            <span>{{restaurant.phone}}</span>
+          </div>
+        </div>
+
+        <div class="restaurant-footer">
+          <div class="price-tag">
+            <span>₹350 for two</span>
+          </div>
+          <button class="view-menu-btn" type="button">
+            <span>View Menu</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="restaurants.length === 0">
+    <span class="empty-icon">🍽️</span>
+    <h3>No restaurants found</h3>
+    <p>Check back later for new places in your area</p>
+  </div>
+</div>

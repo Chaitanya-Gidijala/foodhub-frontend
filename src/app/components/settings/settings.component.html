@@ -1,0 +1,46 @@
+<div class="page-container dashboard-layout">
+  <app-customer-sidebar></app-customer-sidebar>
+
+  <div class="dashboard-content">
+    <div class="content-header">
+      <h2>Account Settings</h2>
+      <p>Manage your preferences and security settings.</p>
+    </div>
+
+    <div class="settings-group">
+      <h3>Notifications</h3>
+      <label class="setting-item">
+        <div class="setting-info">
+          <span class="setting-name">Email Promos & Offers</span>
+          <span class="setting-desc">Receive updates about new restaurants and discounts.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      </label>
+
+      <label class="setting-item">
+        <div class="setting-info">
+          <span class="setting-name">Order SMS Updates</span>
+          <span class="setting-desc">Get real-time texts about your order status.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+      </label>
+    </div>
+
+    <div class="settings-group">
+      <h3>Security</h3>
+      <button class="btn-outline">
+        <mat-icon>lock</mat-icon> Change Password
+      </button>
+      <button class="btn-outline">
+        <mat-icon>devices</mat-icon> Manage Sessions
+      </button>
+    </div>
+
+  </div>
+</div>

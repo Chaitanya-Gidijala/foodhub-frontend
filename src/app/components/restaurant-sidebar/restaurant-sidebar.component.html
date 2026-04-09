@@ -1,0 +1,57 @@
+<!-- Restaurant Owner Sidebar -->
+<aside class="dashboard-sidebar" [class.mobile-open]="isSidebarOpen">
+  <div class="mobile-toggle" (click)="toggleSidebar()">
+    <h3>Owner Menu</h3>
+    <mat-icon>{{isSidebarOpen ? 'close' : 'menu'}}</mat-icon>
+  </div>
+  <div class="sidebar-user-info">
+    <div class="avatar">
+      <mat-icon>store</mat-icon>
+    </div>
+    <div class="user-meta">
+      <h3>Owner Portal</h3>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'restaurant'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>analytics</mat-icon>
+      <span>Overview</span>
+    </a>
+    
+    <div class="nav-divider"></div>
+    <h4 class="nav-heading">Management</h4>
+
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'menu'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>menu_book</mat-icon>
+      <span>Manage Menu</span>
+    </a>
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'orders'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>receipt</mat-icon>
+      <span>Active Orders</span>
+    </a>
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'earnings'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>payments</mat-icon>
+      <span>Earnings</span>
+    </a>
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'reviews'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>star_rate</mat-icon>
+      <span>Ratings & Reviews</span>
+    </a>
+
+    <div class="nav-divider"></div>
+    <h4 class="nav-heading">Settings</h4>
+
+    <a routerLink="/restaurant-owner-dashboard" [queryParams]="{tab: 'settings'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>settings</mat-icon>
+      <span>Store Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </div>
+</aside>

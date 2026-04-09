@@ -1,0 +1,127 @@
+<div class="page-container cart-page bg-light u-compact">
+  <div class="cart-wrapper">
+    <!-- Header -->
+    <div class="section-header cart-header-main">
+      <button class="icon-btn back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-text">
+        <h1>Your Cart</h1>
+        <p *ngIf="cartItems.length > 0">{{cartItems.length}} items from {{restaurantName}}</p>
+      </div>
+    </div>
+
+    <div class="cart-layout" *ngIf="cartItems.length > 0">
+      <!-- Items Section -->
+      <div class="cart-items-section">
+        <div class="cart-card main-list-card">
+          <div class="cart-card-header">
+            <mat-icon class="res-icon">restaurant</mat-icon>
+            <div class="res-name-block">
+              <h3>{{restaurantName}}</h3>
+              <span>Standard Delivery</span>
+            </div>
+            <span class="delivery-time">35 MINS</span>
+          </div>
+
+          <div class="items-list">
+            <div class="cart-item-row" *ngFor="let item of cartItems">
+              <div class="item-visual">
+                <div class="veg-badge" [class.non-veg]="item.price % 10 === 0">
+                  <div class="dot"></div>
+                </div>
+                <div class="item-names">
+                  <h4 class="item-name">{{item.name}}</h4>
+                  <p class="item-price-each">₹{{item.price}}</p>
+                </div>
+              </div>
+              
+              <div class="item-controls">
+                <div class="qty-selector small">
+                  <button (click)="decreaseQuantity(item)" class="qty-btn minus">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                  <span class="qty-val">{{item.quantity}}</span>
+                  <button (click)="increaseQuantity(item)" class="qty-btn plus">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <div class="item-price-total">
+                  <span>₹{{item.price * item.quantity}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="cart-card-footer">
+            <div class="promo-box">
+              <mat-icon>confirmation_number</mat-icon>
+              <input type="text" placeholder="Apply Coupon Code">
+              <button class="apply-btn">APPLY</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bill Section -->
+      <div class="cart-bill-section">
+        <div class="cart-card bill-card">
+          <h2 class="bill-title">Bill Details</h2>
+          
+          <div class="bill-rows">
+            <div class="bill-row">
+              <span class="label">Item Total</span>
+              <span class="value">₹{{itemTotal}}</span>
+            </div>
+            <div class="bill-row">
+              <span class="label">Delivery Fee</span>
+              <span class="value text-success">FREE</span>
+            </div>
+            <div class="bill-row">
+              <span class="label">Platform Fee</span>
+              <span class="value">₹5</span>
+            </div>
+            <div class="bill-row">
+              <div class="label-with-hint">
+                <span class="label">GST and Restaurant Charges</span>
+                <mat-icon class="hint-icon">info</mat-icon>
+              </div>
+              <span class="value">₹{{taxes}}</span>
+            </div>
+          </div>
+
+          <div class="bill-divider"></div>
+
+          <div class="bill-row grand-total">
+            <span class="label">TO PAY</span>
+            <span class="value highlight">₹{{grandTotal + 5}}</span>
+          </div>
+
+          <div class="cancellation-policy">
+            <p><strong>Review your order and address details to avoid cancellations</strong></p>
+            <span>Read policy</span>
+          </div>
+
+          <button class="btn-checkout-primary" (click)="proceedToCheckout()">
+            <span>PROCEED TO PAY</span>
+            <span class="btn-total">₹{{grandTotal + 5}}</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state-card" *ngIf="cartItems.length === 0">
+      <div class="empty-illustration">
+        <mat-icon class="mega-icon">shopping_cart</mat-icon>
+        <div class="pulse-ring"></div>
+      </div>
+      <h2>Your cart is empty</h2>
+      <p>Good food is always just a few clicks away. Go ahead, order some yummy items from the menu!</p>
+      <button class="btn-primary browse-btn-lg" routerLink="/home">
+        SEE RESTAURANTS NEAR YOU
+      </button>
+    </div>
+  </div>
+</div>

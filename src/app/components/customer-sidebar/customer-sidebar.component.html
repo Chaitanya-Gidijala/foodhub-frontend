@@ -1,0 +1,63 @@
+<!-- Customer Sidebar -->
+<aside class="dashboard-sidebar" [class.mobile-open]="isSidebarOpen">
+  <div class="mobile-toggle" (click)="toggleSidebar()">
+    <h3>Navigate Menu</h3>
+    <mat-icon>{{isSidebarOpen ? 'close' : 'menu'}}</mat-icon>
+  </div>
+  <div class="sidebar-user-info">
+    <div class="avatar">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div class="user-meta">
+      <h3>My Account</h3>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a routerLink="/customer-dashboard" routerLinkActive="active" class="nav-item">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+      <mat-icon>account_circle</mat-icon>
+      <span>Personal Info</span>
+    </a>
+    <a routerLink="/orders" routerLinkActive="active" class="nav-item">
+      <mat-icon>receipt_long</mat-icon>
+      <span>Order History</span>
+    </a>
+    <a routerLink="/addresses" routerLinkActive="active" class="nav-item">
+      <mat-icon>location_on</mat-icon>
+      <span>Saved Addresses</span>
+    </a>
+
+    <div class="nav-divider"></div>
+    <h4 class="nav-heading">Other Features</h4>
+
+    <a routerLink="/cart" routerLinkActive="active" class="nav-item">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>My Cart</span>
+      <span class="count-badge" *ngIf="cartCount > 0">{{cartCount}}</span>
+    </a>
+    <a routerLink="/favorites" routerLinkActive="active" class="nav-item">
+      <mat-icon>favorite</mat-icon>
+      <span>Favorites</span>
+      <span class="count-badge active" *ngIf="favoritesCount > 0">{{favoritesCount}}</span>
+    </a>
+    <a routerLink="/wallet" routerLinkActive="active" class="nav-item">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Payment Methods</span>
+    </a>
+    <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </div>
+</aside>

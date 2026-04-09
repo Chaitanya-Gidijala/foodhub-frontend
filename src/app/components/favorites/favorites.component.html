@@ -1,0 +1,134 @@
+<div class="page-container" *ngIf="isLoggedIn()">
+  <div class="fav-page-content">
+    <div class="fav-header">
+      <h1>My Favorites</h1>
+      <p>Your collection of loved restaurants and dishes</p>
+    </div>
+
+    <!-- Favorite Restaurants Section -->
+    <div class="fav-section">
+      <div class="section-heading">
+        <mat-icon>store</mat-icon>
+        <h2>Favorite Restaurants</h2>
+      </div>
+      
+      <div class="restaurant-grid" *ngIf="favoriteRestaurants.length > 0">
+        <div class="restaurant-card" *ngFor="let restaurant of favoriteRestaurants" (click)="viewMenu(restaurant.restaurantName)">
+          <div class="restaurant-image">
+            <div class="image-placeholder">
+              <mat-icon>restaurant</mat-icon>
+            </div>
+            <button class="favorite-btn active" (click)="toggleFavoriteRestaurant($event, restaurant)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <div class="restaurant-badge">
+              <mat-icon>star</mat-icon>
+              <span>4.5</span>
+            </div>
+          </div>
+          <div class="restaurant-info">
+            <h3 class="restaurant-name">{{restaurant.restaurantName}}</h3>
+            <div class="restaurant-meta">
+              <div class="meta-item">
+                <mat-icon>location_on</mat-icon>
+                <span>{{restaurant.location}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="empty-state" *ngIf="favoriteRestaurants.length === 0">
+        <div class="empty-icon">❤️</div>
+        <p>No favorite restaurants yet. Start exploring!</p>
+        <button class="btn-primary" routerLink="/home">Browse Restaurants</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Favorite Dishes Section -->
+    <div class="fav-section">
+      <div class="section-heading">
+        <mat-icon>restaurant_menu</mat-icon>
+        <h2>Favorite Dishes</h2>
+      </div>
+      
+      <div class="dish-grid" *ngIf="favoriteDishes.length > 0">
+        <div class="dish-card" *ngFor="let item of favoriteDishes">
+          <div class="dish-image">
+            <div class="image-placeholder">🍽️</div>
+            <button class="favorite-btn active" (click)="toggleFavoriteDish($event, item)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+          <div class="dish-info">
+            <div class="veg-badge" [class.non-veg]="item.price % 10 === 0">
+              <div class="dot"></div>
+            </div>
+            <h3 class="dish-name">{{item.dishName}}</h3>
+            <p class="dish-price">₹{{item.price}}</p>
+            <p class="dish-desc">{{item.description || 'A delicious treat you loved.'}}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="empty-state" *ngIf="favoriteDishes.length === 0">
+        <div class="empty-icon">🍕</div>
+        <p>No favorite dishes yet. Find something tasty!</p>
+        <button class="btn-primary" routerLink="/home">Explore Menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Public View (Guest) -->
+<div class="page-container" *ngIf="!isLoggedIn()">
+  <div class="fav-page-content public-container">
+    <div class="fav-header">
+      <h1>My Collection</h1>
+      <p>Browse your favorite restaurants and dishes</p>
+    </div>
+
+    <!-- Simple grid for guest favorites -->
+    <div class="fav-section">
+      <h2>Restaurants</h2>
+      <div class="restaurant-grid" *ngIf="favoriteRestaurants.length > 0">
+        <div class="restaurant-card" *ngFor="let restaurant of favoriteRestaurants" (click)="viewMenu(restaurant.restaurantName)">
+          <!-- ... same card structure ... -->
+          <div class="restaurant-image">
+            <div class="image-placeholder">
+              <mat-icon>restaurant</mat-icon>
+            </div>
+            <button class="favorite-btn active" (click)="toggleFavoriteRestaurant($event, restaurant)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+          <div class="restaurant-info">
+            <h3 class="restaurant-name">{{restaurant.restaurantName}}</h3>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="favoriteRestaurants.length === 0" class="empty-text">No restaurants saved.</p>
+    </div>
+
+    <div class="fav-section">
+      <h2>Food Items</h2>
+      <div class="dish-grid" *ngIf="favoriteDishes.length > 0">
+        <div class="dish-card" *ngFor="let item of favoriteDishes">
+           <div class="dish-image">
+            <div class="image-placeholder">🍽️</div>
+            <button class="favorite-btn active" (click)="toggleFavoriteDish($event, item)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+          <div class="dish-info">
+            <h3 class="dish-name">{{item.dishName}}</h3>
+            <p class="dish-price">₹{{item.price}}</p>
+          </div>
+        </div>
+      </div>
+      <p *ngIf="favoriteDishes.length === 0" class="empty-text">No dishes saved.</p>
+    </div>
+  </div>
+</div>

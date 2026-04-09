@@ -1,0 +1,48 @@
+<!-- Professional Customer Dashboard -->
+<div class="page-container dashboard-layout">
+  <app-customer-sidebar></app-customer-sidebar>
+  <div class="dashboard-content dashboard-wrap">
+  <div class="dashboard-hero">
+    <div class="hero-content">
+      <h1>Welcome back! 👋</h1>
+      <p>What are you craving today? Explore top restaurants or jump right back in.</p>
+    </div>
+  </div>
+
+  <div class="dashboard-container">
+    <div class="dashboard-cards">
+      <div class="dash-card" (click)="navigateToRestaurants()">
+        <div class="card-icon-wrapper orange">
+          <mat-icon>restaurant_menu</mat-icon>
+        </div>
+        <div class="card-info">
+          <h2>Browse Restaurants</h2>
+          <p>Explore places and order delicious food</p>
+        </div>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </div>
+
+      <div class="dash-card" (click)="navigateToCart()">
+        <div class="card-icon-wrapper teal">
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
+        <div class="card-info">
+          <h2>My Cart</h2>
+          <p>View items and checkout your current order</p>
+        </div>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </div>
+
+      <div class="dash-card" (click)="navigateToOrders()">
+        <div class="card-icon-wrapper purple">
+          <mat-icon>receipt_long</mat-icon>
+        </div>
+        <div class="card-info">
+          <h2>My Orders</h2>
+          <p>View past orders and track current deliveries</p>
+        </div>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </div>
+  </div>
+</div>
+</div>

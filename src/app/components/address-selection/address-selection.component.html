@@ -1,0 +1,68 @@
+<!-- Premium Address Selection -->
+<div class="address-container u-compact">
+  <div class="address-header">
+    <button class="back-btn" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header-content">
+      <h1>Select Delivery Address</h1>
+      <p>Choose where you want your order delivered</p>
+    </div>
+  </div>
+
+  <div class="address-content">
+    <div class="addresses-grid" *ngIf="addresses.length > 0">
+      <div class="address-card card-compact" *ngFor="let address of addresses" 
+           [class.selected]="selectedAddressId === address.id"
+           (click)="selectAddress(address.id)">
+        <div class="card-header">
+          <div class="address-type">
+            <mat-icon>{{address.addressType === 'HOME' ? 'home' : address.addressType === 'WORK' ? 'business' : 'location_on'}}</mat-icon>
+            <span>{{address.addressType}}</span>
+          </div>
+          <span class="default-badge" *ngIf="address.isDefault">Default</span>
+          <button class="edit-btn" (click)="editAddress(address.id); $event.stopPropagation()">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+        
+        <div class="address-body">
+          <p class="contact-name">{{address.fullName}}</p>
+          <p class="address-text">{{address.addressLine1}}</p>
+          <p class="address-text" *ngIf="address.addressLine2">{{address.addressLine2}}</p>
+          <p class="address-text">{{address.city}}, {{address.state}} - {{address.pincode}}</p>
+          <p class="phone-number">
+            <mat-icon>phone</mat-icon>
+            {{address.phoneNumber}}
+          </p>
+        </div>
+
+        <div class="select-indicator" *ngIf="selectedAddressId === address.id">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+      </div>
+
+      <div class="add-address-card card-compact" (click)="addNewAddress()">
+        <mat-icon class="small-add-icon">add_circle_outline</mat-icon>
+        <span>Add New Address</span>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="addresses.length === 0">
+      <div class="empty-icon">📍</div>
+      <h2>No addresses saved</h2>
+      <p>Add a delivery address to continue</p>
+      <button class="add-btn btn-compact" (click)="addNewAddress()">
+        <mat-icon>add</mat-icon>
+        <span>Add Address</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="action-footer" *ngIf="addresses.length > 0">
+    <button class="proceed-btn btn-compact" [disabled]="!selectedAddressId" (click)="proceedToPayment()">
+      <span>Proceed to Payment</span>
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</div>

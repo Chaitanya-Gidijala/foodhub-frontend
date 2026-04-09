@@ -1,0 +1,358 @@
+/* ========================
+   Navbar – Professional Design
+   ======================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+}
+
+.navbar-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary) 0%, #FF7D5A 100%);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(244, 98, 58, 0.28);
+  transition: transform var(--transition);
+}
+
+.navbar-brand:hover .brand-logo {
+  transform: scale(1.06);
+}
+
+.brand-logo mat-icon {
+  color: white;
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.brand-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--primary) 0%, #FF7D5A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Menu Links */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-link mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.nav-link:hover {
+  background: var(--surface-alt);
+  color: var(--primary);
+}
+
+.nav-link.active {
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Cart */
+.cart-link {
+  position: relative;
+}
+
+.cart-icon-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--primary);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 5px;
+  border-radius: var(--radius-full);
+  min-width: 17px;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 0 1px 6px rgba(244, 98, 58, 0.5);
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+.cart-badge {
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+
+/* User Menu */
+.user-menu {
+  flex-shrink: 0;
+}
+
+.user-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.user-avatar {
+  width: 42px;
+  height: 42px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  border: 1.5px solid var(--border);
+  position: relative;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.user-role-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.user-role-dot.admin {
+  background: var(--primary);
+  box-shadow: 0 0 0 2px rgba(244, 98, 58, 0.2);
+}
+
+.user-avatar mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  color: var(--primary);
+}
+
+.user-btn:hover .user-avatar {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.dropdown-icon {
+  display: none;
+}
+
+/* Auth Buttons */
+.navbar-auth {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.btn-outline,
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 8px var(--sp-5);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--border-dark);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.btn-primary {
+  background: var(--primary);
+  border: none;
+  color: white;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-primary-lg);
+  transform: translateY(-1px);
+}
+
+.btn-outline mat-icon,
+.btn-primary mat-icon {
+  font-size: 17px;
+  width: 17px;
+  height: 17px;
+}
+
+/* Dropdown */
+::ng-deep .user-dropdown {
+  margin-top: var(--sp-2);
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-xl) !important;
+  border: 1px solid var(--border) !important;
+  overflow: hidden;
+  min-width: 200px !important;
+}
+
+::ng-deep .user-dropdown .mat-mdc-menu-content {
+  padding: var(--sp-2) !important;
+}
+
+::ng-deep .user-dropdown .mat-mdc-menu-item {
+  border-radius: var(--radius-sm) !important;
+  margin: 2px 0 !important;
+  font-size: var(--text-sm) !important;
+  font-weight: 500 !important;
+  height: 44px !important;
+}
+
+::ng-deep .user-dropdown .mat-mdc-menu-item:hover {
+  background: var(--surface-alt) !important;
+}
+
+::ng-deep .user-dropdown .logout-btn {
+  color: var(--error) !important;
+}
+
+::ng-deep .user-dropdown .mat-mdc-menu-item mat-icon {
+  margin-right: var(--sp-3);
+  color: var(--text-muted);
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+::ng-deep .user-dropdown .logout-btn mat-icon {
+  color: var(--error);
+}
+
+/* ======== Responsive ======== */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 var(--sp-4);
+  }
+
+  .nav-link span {
+    display: none;
+  }
+
+  .nav-link {
+    padding: var(--sp-2) var(--sp-3);
+  }
+
+  .brand-name {
+    font-size: var(--text-lg);
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .user-avatar mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .btn-outline span,
+  .btn-primary span {
+    display: none;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    padding: 8px var(--sp-3);
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-name {
+    display: none;
+  }
+
+  .brand-logo {
+    width: 36px;
+    height: 36px;
+  }
+}

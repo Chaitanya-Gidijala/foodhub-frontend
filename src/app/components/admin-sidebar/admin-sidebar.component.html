@@ -1,0 +1,62 @@
+<!-- Admin Sidebar -->
+<aside class="dashboard-sidebar" [class.mobile-open]="isSidebarOpen">
+  <div class="mobile-toggle" (click)="toggleSidebar()">
+    <h3>Admin Menu</h3>
+    <mat-icon>{{isSidebarOpen ? 'close' : 'menu'}}</mat-icon>
+  </div>
+  <div class="sidebar-user-info">
+    <div class="avatar">
+      <mat-icon>admin_panel_settings</mat-icon>
+    </div>
+    <div class="user-meta">
+      <h3>Admin Portal</h3>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'overview'}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard Overview</span>
+    </a>
+    
+    <div class="nav-divider"></div>
+    <h4 class="nav-heading">Platform</h4>
+
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'users'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>people</mat-icon>
+      <span>Manage Users</span>
+    </a>
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'restaurants'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>store</mat-icon>
+      <span>Restaurants</span>
+    </a>
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'owners'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>verified</mat-icon>
+      <span>Approvals</span>
+    </a>
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'orders'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>receipt_long</mat-icon>
+      <span>All Orders</span>
+    </a>
+    
+    <div class="nav-divider"></div>
+    <h4 class="nav-heading">System</h4>
+
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'reports'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>insert_chart</mat-icon>
+      <span>Reports</span>
+    </a>
+
+    <a routerLink="/admin-dashboard" [queryParams]="{tab: 'settings'}" routerLinkActive="active" class="nav-item">
+      <mat-icon>settings_suggest</mat-icon>
+      <span>Global Settings</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="logout-btn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </div>
+</aside>

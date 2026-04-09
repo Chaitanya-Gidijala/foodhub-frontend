@@ -1,0 +1,181 @@
+/* ======== Profile Hub (Account Terminal) ======== */
+.profile-hub {
+  padding: 0 !important;
+  background: var(--surface) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.hub-header {
+  background: var(--white);
+  padding: var(--sp-5) var(--sp-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.user-info-section h1 {
+  font-size: var(--text-xl);
+  margin-bottom: 2px;
+}
+
+.user-info-section p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.edit-profile-btn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  transition: all var(--transition-fast);
+}
+
+.edit-profile-btn-icon:hover {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  transform: scale(1.05);
+}
+
+.edit-profile-btn-icon mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Hub Grid */
+.hub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+}
+
+.hub-card {
+  background: var(--white);
+  padding: 12px var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hub-card:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+}
+
+.card-icon mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.hub-card:hover .card-icon {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.card-text {
+  flex: 1;
+}
+
+.card-text h3 {
+  font-size: var(--text-md);
+  margin-bottom: 0px;
+  font-weight: 600;
+}
+
+.card-text p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.chevron {
+  color: var(--text-muted);
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Footer Section */
+.hub-footer {
+  padding: var(--sp-6) var(--sp-4) var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.logout-card {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 10px;
+  background: var(--white);
+  border: 1px solid #fee2e2;
+  border-radius: var(--radius-md);
+  color: #ef4444;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  transition: all var(--transition-fast);
+}
+
+.logout-card:hover {
+  background: #fef2f2;
+}
+
+.app-version {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hub-header {
+    padding: var(--sp-6);
+  }
+  
+  .hub-grid {
+    grid-template-columns: 1fr;
+    padding: var(--sp-4);
+  }
+
+  .hub-card {
+    padding: var(--sp-4);
+  }
+
+  .user-info-section h1 {
+    font-size: var(--text-xl);
+  }
+}

@@ -1,0 +1,26 @@
+<div class="page-container dashboard-layout">
+  <app-customer-sidebar></app-customer-sidebar>
+
+  <div class="dashboard-content">
+    <div class="content-header">
+      <h2>Payment Methods</h2>
+      <p>Manage your saved cards and FoodHub Wallet balance.</p>
+    </div>
+
+    <div class="wallet-balance-card">
+      <div class="balance-info">
+        <span class="label">Wallet Balance</span>
+        <h2 class="amount">₹0.00</h2>
+      </div>
+      <button class="btn-outline add-money">
+        <mat-icon>add_circle</mat-icon> Add Money
+      </button>
+    </div>
+
+    <h3 class="section-title">Saved Cards</h3>
+    <div class="empty-cards">
+      <mat-icon>credit_card</mat-icon>
+      <p>No saved cards found. Add a card during checkout for faster payments.</p>
+    </div>
+  </div>
+</div>

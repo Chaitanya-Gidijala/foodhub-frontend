@@ -1,0 +1,169 @@
+<!-- Premium Restaurant Owner Dashboard -->
+<div class="page-container dashboard-layout">
+  <app-restaurant-sidebar></app-restaurant-sidebar>
+  <div class="dashboard-content owner-dashboard">
+    <div class="dashboard-header">
+      <h1>My Restaurant</h1>
+      <p>Manage your restaurant, menu, and orders</p>
+    </div>
+    <!-- Create Restaurant Form -->
+    <div *ngIf="showCreateForm" class="create-card">
+      <h2>Create Your Restaurant</h2>
+      <form (ngSubmit)="createRestaurant()">
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Restaurant Name</mat-label>
+            <input matInput [(ngModel)]="newRestaurant.restaurantName" name="name" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput [(ngModel)]="newRestaurant.location" name="location" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput [(ngModel)]="newRestaurant.phone" name="phone" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="newRestaurant.email" name="email" required>
+          </mat-form-field>
+        </div>
+        <button class="submit-btn" type="submit">Create Restaurant</button>
+      </form>
+    </div>
+
+    <!-- Restaurant Details -->
+    <div *ngIf="restaurant">
+      <div *ngIf="restaurant.verificationStatus !== 'APPROVED'" class="status-banner" [class.pending]="restaurant.verificationStatus === 'PENDING'" 
+           [class.rejected]="restaurant.verificationStatus === 'REJECTED'">
+        <mat-icon>{{restaurant.verificationStatus === 'REJECTED' ? 'cancel' : 'schedule'}}</mat-icon>
+        <span>Status: {{restaurant.verificationStatus}}</span>
+      </div>
+      
+      <div class="restaurant-info">
+        <h2>{{restaurant.restaurantName}}</h2>
+        <div class="restaurant-meta">
+          <span>📍 {{restaurant.location}}</span>
+          <span>📞 {{restaurant.phone}}</span>
+          <span>✉️ {{restaurant.email}}</span>
+        </div>
+      </div>
+
+      <!-- Menu Management -->
+      <div class="section-card" *ngIf="activeTab === 'menu'">
+        <div class="section-header">
+          <h3>Menu Items ({{menuItems.length}})</h3>
+          <button class="add-btn" (click)="showMenuForm = !showMenuForm">
+            <mat-icon>{{showMenuForm ? 'close' : 'add'}}</mat-icon>
+            <span>{{showMenuForm ? 'Cancel' : 'Add Menu Item'}}</span>
+          </button>
+        </div>
+
+        <div *ngIf="showMenuForm" class="menu-form">
+          <h4>{{editingMenuItem ? 'Edit' : 'Add'}} Menu Item</h4>
+          <div class="form-grid">
+            <mat-form-field appearance="outline">
+              <mat-label>Dish Name</mat-label>
+              <input matInput [(ngModel)]="editingMenuItem ? editingMenuItem.dishName : newMenuItem.dishName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Price</mat-label>
+              <input matInput type="number" [(ngModel)]="editingMenuItem ? editingMenuItem.price : newMenuItem.price">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Category</mat-label>
+              <input matInput [(ngModel)]="editingMenuItem ? editingMenuItem.categoryName : newMenuItem.categoryName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <textarea matInput [(ngModel)]="editingMenuItem ? editingMenuItem.description : newMenuItem.description" rows="3"></textarea>
+            </mat-form-field>
+          </div>
+          <mat-checkbox [(ngModel)]="editingMenuItem ? editingMenuItem.available : newMenuItem.available">Available</mat-checkbox>
+          <div class="form-actions">
+            <button class="submit-btn" (click)="editingMenuItem ? updateMenuItem() : addMenuItem()">
+              {{editingMenuItem ? 'Update' : 'Add'}}
+            </button>
+            <button class="add-btn" style="background: var(--gray-300); color: var(--gray-900);" (click)="resetMenuForm()">Cancel</button>
+          </div>
+        </div>
+
+        <div class="menu-grid" *ngIf="menuItems.length > 0">
+          <div class="menu-item-card" *ngFor="let item of menuItems">
+            <div class="menu-item-header">
+              <div class="menu-item-name">{{item.dishName}}</div>
+              <div class="menu-item-actions">
+                <button class="icon-btn" (click)="editMenuItem(item)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button class="icon-btn" (click)="deleteMenuItem(item.id!)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="menu-item-desc">{{item.description}}</div>
+            <div class="menu-item-footer">
+              <div class="menu-item-price">₹{{item.price}}</div>
+              <div class="menu-item-category">{{item.categoryName}}</div>
+              <div class="availability-badge" [class.available]="item.available" [class.unavailable]="!item.available">
+                {{item.available ? 'Available' : 'Unavailable'}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="menuItems.length === 0">
+          <mat-icon>restaurant_menu</mat-icon>
+          <p>No menu items yet. Add your first dish!</p>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      <div class="section-card" *ngIf="activeTab === 'orders'">
+        <div class="section-header">
+          <h3>Orders ({{orders.length}})</h3>
+        </div>
+
+        <table class="orders-table" *ngIf="orders.length > 0">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td>#{{order.orderId}}</td>
+              <td>User {{order.userId}}</td>
+              <td>₹{{order.totalPrice}}</td>
+              <td>{{order.status}}</td>
+              <td>
+                <select class="status-select" (change)="updateOrderStatus(order.orderId, $any($event.target).value)">
+                  <option value="">Update Status</option>
+                  <option value="CONFIRMED">Confirmed</option>
+                  <option value="PREPARING">Preparing</option>
+                  <option value="READY">Ready</option>
+                  <option value="DELIVERED">Delivered</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty-state" *ngIf="orders.length === 0">
+          <mat-icon>receipt_long</mat-icon>
+          <p>No orders yet</p>
+        </div>
+      </div>
+    </div>
+    <!-- Placeholder for non-mapped active tabs (settings, earnings, reviews) -->
+    <div *ngIf="activeTab === 'settings' || activeTab === 'earnings' || activeTab === 'reviews'" class="empty-state">
+      <div class="empty-icon">🚧</div>
+      <p>This section is under construction.</p>
+    </div>
+
+  </div>
+</div>

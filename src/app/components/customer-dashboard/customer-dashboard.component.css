@@ -1,0 +1,168 @@
+/* ========================
+   Customer Dashboard – Professional Design
+   ======================== */
+.dashboard-wrap {
+  min-height: calc(100vh - var(--nav-height));
+  background: var(--surface);
+  padding-bottom: var(--sp-12);
+}
+
+.dashboard-hero {
+  background: linear-gradient(150deg, #1A1A2E 0%, #2D1B69 50%, #F4623A 100%);
+  padding: var(--sp-12) var(--sp-6) var(--sp-16);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 120%, rgba(244, 98, 58, 0.40) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: white;
+  margin-bottom: var(--sp-2);
+  letter-spacing: -0.03em;
+}
+
+.hero-content p {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.8);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dashboard-container {
+  max-width: 960px;
+  margin: -40px auto 0;
+  padding: 0 var(--sp-6);
+  position: relative;
+  z-index: 2;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--sp-5);
+}
+
+.dash-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  padding: var(--sp-6);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-card:hover {
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(244, 98, 58, 0.25);
+  transform: translateY(-4px);
+}
+
+.card-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-2);
+}
+
+.card-icon-wrapper.orange {
+  background: rgba(244, 98, 58, 0.12);
+  color: var(--primary);
+}
+
+.card-icon-wrapper.teal {
+  background: rgba(14, 177, 168, 0.12);
+  color: #0A7D78;
+}
+
+.card-icon-wrapper.purple {
+  background: rgba(139, 92, 246, 0.12);
+  color: #7C3AED;
+}
+
+.card-icon-wrapper mat-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-info h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-1);
+  letter-spacing: -0.02em;
+}
+
+.card-info p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: var(--leading-snug);
+}
+
+.arrow-icon {
+  position: absolute;
+  bottom: var(--sp-6);
+  right: var(--sp-6);
+  color: var(--text-muted);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-fast);
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.dash-card:hover .arrow-icon {
+  color: var(--primary);
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ======== Responsive ======== */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 var(--sp-4);
+  }
+
+  .dashboard-hero {
+    padding: var(--sp-8) var(--sp-4) var(--sp-12);
+  }
+
+  .hero-content h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .dash-card {
+    padding: var(--sp-5);
+  }
+}
