@@ -292,9 +292,9 @@ img {
     gap: 0;
   }
   
-  /* Hide sidebars on mobile globally */
+  /* Sidebars are handled reactively by their components on mobile */
   .dashboard-sidebar {
-    display: none !important;
+    display: flex;
   }
 
   .dashboard-content {

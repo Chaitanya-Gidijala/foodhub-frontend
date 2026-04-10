@@ -26,10 +26,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log('Navbar received user update:', user);
       this.user = user;
       if (user) {
-        this.cartService.cartCount$.subscribe(count => {
-          this.cartCount = count;
-        });
-        this.cartService.getCartByUserId(user.id!).subscribe();
+        // Only fetch cart count for customers
+        if (user.role === 'CUSTOMER') {
+          this.cartService.cartCount$.subscribe(count => {
+            this.cartCount = count;
+          });
+          this.cartService.getCartByUserId(user.id!).subscribe({
+            error: (err) => console.warn('Cart service unavailable, skipping count update')
+          });
+        }
       }
     });
     // Force refresh user data
